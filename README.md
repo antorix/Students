@@ -1,6 +1,6 @@
 # Students
 
-Назначение учебных заданий НХЖС
+Планирование и назначение учебных заданий НХЖС
 
 ![](https://4.bp.blogspot.com/-j1k-FIdG1HY/WcEHs-dFbzI/AAAAAAABU7A/piFGG0uzz4khXbsiWhD-yqLMlfFjDhg9ACLcBGAs/s1600/screenshot.png)
 
