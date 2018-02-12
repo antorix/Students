@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-currentversion = "3.1.1"
+currentversion = "3.1.2"
 
 import tkinter as tk
 from tkinter import ttk
@@ -138,7 +138,7 @@ class Setup(tk.Frame):
 
         # Labels and fields
         self.entries=[]
-        list=["Размер шрифта", "Цвета", "Резервные копии", "Файл бланков", "Ссылка на НХЖС", "Заметка"]
+        list=["Размер шрифта", "Цвета", "Резервные копии", "Файл заданий", "Ссылка на НХЖС", "Заметка"]
         for row, text in zip(range(len(list)), list):
             ttk.Label(frame1, text=text, justify="right").grid(column=0, row=row, padx=pad, pady=pad, sticky="en")                    
         for row in range(len(list)):
@@ -256,7 +256,7 @@ class Card(tk.Frame):
         self.window.bind_class("Text", "<3>", self.root.contextMenu)
         self.window.bind("<Return>", self.save)
         self.window.bind("<Escape>", self.cancel)
-        self.window.tk.call('wm', 'iconphoto', self.window._w, self.root.img[7])
+        #self.window.tk.call('wm', 'iconphoto', self.window._w, self.root.img[7])
         
         # Styling
         self.style=ttk.Style()
@@ -466,6 +466,7 @@ class Root(ttk.Frame):
         self.ipadxy=0
         self.fontsize=9
         self.style = ttk.Style()
+        self.style.configure("main.Treeview", relief="ridge")
         
         # Settings
         self.menubar = tk.Menu(self.master)
@@ -500,7 +501,6 @@ class Root(ttk.Frame):
         ttk.Checkbutton(self.master, text="Скрыть неактивных", variable=self.status, onvalue="+", offvalue="-", command=self.setStatus).grid(column=0, row=0, padx=self.padx, sticky="e")
         
         # Students list
-        self.style.configure("main.Treeview", relief="ridge")
         self.headers=["Имя", "Выступление", "Помощь", "Урок", ""]
         self.list=ttk.Treeview(self.master, columns=self.headers, show="headings", style="main.Treeview")
         self.list.grid(column=0, row=1, padx=self.padx*0, pady=self.pady*0, sticky="wnse")
@@ -543,17 +543,17 @@ class Root(ttk.Frame):
         # Заметка
         self.statNote=ttk.LabelFrame(self.actionFrame, text="Заметка")
         self.statNote.grid(column=1, row=0, padx=self.padx, pady=self.pady, sticky="ns")
-        self.notepad=ScrolledText.ScrolledText(self.statNote, wrap="word", relief="flat", cursor="hand2", background="lightyellow", height=6, width=50)
+        self.notepad=ScrolledText.ScrolledText(self.statNote, wrap="word", relief="flat", cursor="hand2", background="lightyellow", height=8, width=60)
         self.notepad.pack(anchor="nw", padx=self.padx, pady=self.pady*2)
-        self.notepad.bind("<1>", self.settings)#lambda x: self.settings(fromNote=True))
+        self.notepad.bind("<1>", self.settings)
         
         # Статистика
         self.statFrame=ttk.LabelFrame(self.actionFrame, text="Статистика")
         self.statFrame.grid(column=2, row=0, padx=self.padx, pady=self.pady, sticky="nse")
         self.stats=ttk.Label(self.statFrame)
         self.stats.grid(padx=self.padx, pady=self.pady, sticky="wn")
-        self.stats["text"]="Всего учащихся:\nБратьев:\nСестер:\nНикогда не выступали:\nНикогда не помогали:\nБез урока:\nНеактивны:" 
-        self.stats2=ttk.Label(self.statFrame, style='stats.TLabel')
+        self.stats["text"]="Всего учащихся:\nАктивных:\nНеактивных:\nБратьев:\nСестер:\nНикогда не выступали:\nНикогда не помогали:\nБез урока:" 
+        self.stats2=ttk.Label(self.statFrame)
         self.stats2.grid(column=1, row=0, padx=self.padx, pady=self.pady, sticky="en")        
         
         # Footer
@@ -642,7 +642,7 @@ class Root(ttk.Frame):
             if student[1]=="00.00.00": noDate1+=1
             if student[2]=="00.00.00": noDate2+=1
             if student[3]=="": noStudy+=1
-        self.stats2["text"]="%d\n%d\n%d\n%d\n%d\n%d\n%d" % (len(self.student), brothers, sisters, noDate1, noDate2, noStudy, self.noactive)
+        self.stats2["text"]="%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d" % (len(self.student), len(self.student)-self.noactive, self.noactive, brothers, sisters, noDate1, noDate2, noStudy)
         
         # Show note        
         self.notepad["state"]="normal"
@@ -663,17 +663,17 @@ class Root(ttk.Frame):
             self.activewarn.grid_forget()
         
         # Adjust fonts
-        self.notepad["font"]=("", self.fontsize-1)
+        self.notepad["font"]=("", self.fontsize)
         self.stats["font"]=("", self.fontsize)
         self.stats2["font"]=("", self.fontsize)
         
     def resizeList(self):
         """Resize columns"""
-        self.list.column(0, width=130)
-        self.list.column(1, width=70)
-        self.list.column(2, width=70)
-        self.list.column(3, width=20)
-        self.list.column(4, width=100)
+        self.list.column(0, width=60)
+        self.list.column(1, width=50)
+        self.list.column(2, width=50)
+        self.list.column(3, width=1)
+        #self.list.column(4, width=100)
         
     def getWinSize(self, event=None, save=None):
         """Manage window geometry saving"""        
@@ -996,5 +996,4 @@ class Root(ttk.Frame):
         menu.tk.call("tk_popup", menu, e.x_root, e.y_root)
         
 # Launch interface
-app=Root()
-app.mainloop()
+Root().mainloop()
