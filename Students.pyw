@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-currentversion = "3.1.2"
+currentversion = "3.2.0"
 
 import tkinter as tk
 from tkinter import ttk
@@ -280,7 +280,7 @@ class Card(tk.Frame):
                 self.entries[row].insert(0, self.realName)                
             elif row==3:                                                        # study
                 self.studies = tk.StringVar()                
-                self.entries.append(ttk.Combobox(frame1, width=40, height=20, font=("", self.root.fontsize), state="readonly", textvariable=self.studies)) # publisher/date
+                self.entries.append(ttk.Combobox(frame1, width=50, height=20, font=("", self.root.fontsize), state="readonly", textvariable=self.studies))
                 self.entries[row]["values"]=self.root.studyList       
                 self.entries[row].grid(column=1, columnspan=2, row=row, pady=pad, sticky="we")                
                 for s in self.root.studyList:
@@ -349,8 +349,19 @@ class Card(tk.Frame):
         if self.entries[6].get(0.0, "end").strip()=="":
             self.entries[6].insert("end", study[ 0: study.index(".")])
         elif self.entries[3].get().strip()!="":
-            self.entries[6].insert("end", ", %s" % study[ 0: study.index(".")])        
+            self.entries[6].insert("end", ", %s" % study[ 0: study.index(".")])
         self.entries[3].set("")
+        
+        # Sort study numbers
+        s1=self.entries[6].get(0.0, "end").strip()
+        try:
+            list1=[int(s) for s in s1.split(',')]
+            list2=sorted(list1)
+        except:
+            return
+        s2 = (str(list2)[1 : str(list2).index("]")])
+        self.entries[6].delete(0.0, "end")
+        self.entries[6].insert("end", s2)
         
     def clear(self):
         """Clear note"""
