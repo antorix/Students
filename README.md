@@ -2,7 +2,7 @@
 
 Планирование и назначение учебных заданий НХЖС
 
-![](https://4.bp.blogspot.com/-vTaiS6lPE4c/WcyQTUqbkkI/AAAAAAABVCE/mKq-dL8CxC08EHdgwzlzhPAy1mQG_VaQACLcBGAs/s1600/screenshot.png)
+![](https://2.bp.blogspot.com/-WSmOf8OyINw/XDr6hY9B80I/AAAAAAABfd8/Shk7v-9XzRI7JMDJH2DQ9hCzQIY52xVNQCLcBGAs/s1600/screenshot.png)
 
 * **Информация:**
 http://studentsprogram.blogspot.com
