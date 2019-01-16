@@ -1,7 +1,7 @@
 ﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-currentversion = "3.2.1"
+currentversion = "3.3.0"
 
 import tkinter as tk
 from tkinter import ttk
