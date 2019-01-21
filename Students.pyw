@@ -1,7 +1,7 @@
-﻿#!/usr/bin/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-currentversion = "3.3.0"
+currentversion = "3.2.0"
 
 import tkinter as tk
 from tkinter import ttk
@@ -169,8 +169,10 @@ class Setup(tk.Frame):
         self.entries[5].insert(0.0, self.root.datastring[14])
         if self.fromNote==True:
             self.entries[5].focus_force()
+            print(1)
         else:
             self.entries[0].focus_force()
+            print(2)
         """
         14: Note
         15: Program version
@@ -271,52 +273,56 @@ class Card(tk.Frame):
         
         # Labels and fields
         self.entries=[]
-        for row, text in zip(range(5), ["Имя", "Выступление", "Помощь", "Заметка", "Совет"]):
+        for row, text in zip(range(7), ["Имя", "Выступление", "Помощь", "Урок", "Заметка", "Совет", "Пройденные\nуроки"]):
             ttk.Label(frame1, text=text, justify="right").grid(column=0, row=row, padx=pad, pady=pad, sticky="e")            
-        for row in range(5):
+        for row in range(7):
             if row==0:                                                          # name
                 self.entries.append(tk.Entry(frame1, font="{%s} %s" % ("", self.root.fontsize), relief="flat"))
                 self.entries[row].grid(column=1, row=row, pady=pad, sticky="we")
-                self.entries[row].insert(0, self.realName)                       
-            elif row<3:
+                self.entries[row].insert(0, self.realName)                
+            elif row==3:                                                        # study
+                self.studies = tk.StringVar()                
+                self.entries.append(ttk.Combobox(frame1, width=50, height=20, font=("", self.root.fontsize), state="readonly", textvariable=self.studies))
+                self.entries[row]["values"]=self.root.studyList       
+                self.entries[row].grid(column=1, columnspan=2, row=row, pady=pad, sticky="we")                
+                for s in self.root.studyList:
+                    if "." in s and fields[row] == s[0:s.index(".")]:
+                        self.entries[row].set(s)
+                
+            elif row<5:
                 self.entries.append(tk.Entry(frame1, font="{%s} %s" % ("", self.root.fontsize), relief="flat"))
                 self.entries[row].grid(column=1, columnspan=2, row=row, pady=pad, sticky="we")
-                self.entries[row].insert(0, fields[row])                
-            elif row==3:                                                        # note
-                self.entries.append(tk.Entry(frame1, font="{%s} %s" % ("", self.root.fontsize), relief="flat"))
-                self.entries[row].grid(column=1, columnspan=3, row=row, pady=pad, sticky="wesn")
-                self.entries[row].insert(0, fields[row])                
-            else:                                                             # counsel
+                self.entries[row].insert(0, fields[row])
+            else:
                 self.entries.append(ScrolledText.ScrolledText(frame1, font="{%s} %s" % ("", self.root.fontsize), wrap="word", relief="flat", height=3, width=40))                
                 self.entries[row].grid(column=1, columnspan=3, row=row, pady=pad, sticky="wesn")
                 self.entries[row].insert(0.0, fields[row])
-            
         self.entries[0].focus_force()
         
         # Gender radio selection
         self.entries.append(tk.StringVar())        
         if self.gender=="б":
-            self.entries[5].set("б")
+            self.entries[7].set("б")
         elif self.gender!=None:
-            self.entries[5].set("с")
-        ttk.Radiobutton(frame1, variable=self.entries[5], text="Брат", value="б").grid(column=2, row=0, padx=pad, pady=pad, sticky="we")
-        ttk.Radiobutton(frame1, variable=self.entries[5], text="Сестра", value="с").grid(column=3, row=0, padx=pad, pady=pad, sticky="we")        
+            self.entries[7].set("с")
+        ttk.Radiobutton(frame1, variable=self.entries[7], text="Брат", value="б").grid(column=2, row=0, padx=pad, pady=pad, sticky="we")
+        ttk.Radiobutton(frame1, variable=self.entries[7], text="Сестра", value="с").grid(column=3, row=0, padx=pad, pady=pad, sticky="we")        
         
         # Small buttons
         ttk.Button(frame1, text="Сегодня", image=self.root.img[9],  compound="left", style='small.TButton', command=lambda: self.today(self.entries[1])).grid(column=2, row=1, sticky="e")
         ttk.Button(frame1, text="Никогда", image=self.root.img[10], compound="left", style='small.TButton', command=lambda: self.never(self.entries[1])).grid(column=3, row=1, sticky="e")        
         ttk.Button(frame1, text="Сегодня", image=self.root.img[9],  compound="left", style='small.TButton', command=lambda: self.today(self.entries[2])).grid(column=2, row=2, sticky="e")
         ttk.Button(frame1, text="Никогда", image=self.root.img[10], compound="left", style='small.TButton', command=lambda: self.never(self.entries[2])).grid(column=3, row=2, sticky="e")
-        #ttk.Button(frame1, text="Пройден", image=self.root.img[11], compound="left", style='small.TButton', command=self.complete).grid(column=3, row=3, sticky="e")
-        ttk.Button(frame1, text="Очистить",image=self.root.img[12], compound="left", style='small.TButton', command=self.clear).grid(column=3, row=3, sticky="e")
+        ttk.Button(frame1, text="Пройден", image=self.root.img[11], compound="left", style='small.TButton', command=self.complete).grid(column=3, row=3, sticky="e")
+        ttk.Button(frame1, text="Очистить",image=self.root.img[12], compound="left", style='small.TButton', command=self.clear).grid(column=3, row=4, sticky="e")
         
         # Status checkbox
         self.entries.append(tk.StringVar())
         if self.status=="+" or self.status==None:
-            self.entries[6].set("+")
+            self.entries[8].set("+")
         else:
-            self.entries[6].set("-")
-        ttk.Checkbutton(self.window, text="Активен", variable=self.entries[6], onvalue="+", offvalue="-").grid(column=0, row=1, padx=pad*2, pady=pad, sticky="w")        
+            self.entries[8].set("-")
+        ttk.Checkbutton(self.window, text="Активен", variable=self.entries[8], onvalue="+", offvalue="-").grid(column=0, row=1, padx=pad*2, pady=pad, sticky="w")        
    
         # Buttons frame to save/cancel
         frame2=tk.Frame(self.window)
@@ -361,14 +367,14 @@ class Card(tk.Frame):
         
     def clear(self):
         """Clear note"""
-        self.entries[3].delete(0, "end")        
+        self.entries[4].delete(0, "end")        
         
     def save(self, event=None):
         """Save student fields"""
         if self.entries[0].get().strip()=="":                                   # check for errors
             mb.showwarning("Внимание", "Требуется имя!")
             self.entries[0].focus_force()
-        elif self.entries[5].get()=="":
+        elif self.entries[7].get()=="":
             mb.showwarning("Внимание", "Требуется пол!")
             self.window.focus_force()
         elif checkDate(self.entries[1].get().strip())==False:
@@ -378,14 +384,20 @@ class Card(tk.Frame):
             mb.showwarning("Внимание", "Дата помощи должна быть в формате\nДД.ММ.ГГ (например 30.11.16)!")
             self.entries[2].focus_force()
         else:                                                                   # everything is ok, save
-            for row in range(5):
+            for row in range(7):
                 if row==0:                                                      # process name
-                    self.fields[0] = "%s{%s%s}" % (self.entries[0].get().strip(), self.entries[5].get(), self.entries[6].get()) # add tech data to name
-                elif row<4:
+                    self.fields[0] = "%s{%s%s}" % (self.entries[0].get().strip(), self.entries[7].get(), self.entries[8].get()) # add tech data to name
+                elif row==3:                                                    # process study
+                    study=self.entries[3].get()
+                    if "." in study:
+                        self.fields[3] = study[0:study.index(".")]
+                    else:
+                        self.fields[3]=""
+                elif row<5:
                     self.fields[row]=self.entries[row].get().strip()            
                 else:
-                    self.fields[row]=clearReturns(self.entries[row].get(0.0, "end").strip())
-                    #self.fields[6]=clearReturns(self.entries[6].get().strip())
+                    self.fields[5]=clearReturns(self.entries[5].get(0.0, "end").strip())
+                    self.fields[6]=clearReturns(self.entries[6].get(0.0, "end").strip())
             self.window.destroy()        
     
     def cancel(self, event=None):
@@ -502,7 +514,7 @@ class Root(ttk.Frame):
         ttk.Checkbutton(self.master, text="Скрыть неактивных", variable=self.status, onvalue="+", offvalue="-", command=self.setStatus).grid(column=0, row=0, padx=self.padx, sticky="e")
         
         # Students list
-        self.headers=["Имя", "Выступление", "Помощь", ""]
+        self.headers=["Имя", "Выступление", "Помощь", "Урок", ""]
         self.list=ttk.Treeview(self.master, columns=self.headers, show="headings", style="main.Treeview")
         self.list.grid(column=0, row=1, padx=self.padx*0, pady=self.pady*0, sticky="wnse")
         self.list.focus()
@@ -578,18 +590,17 @@ class Root(ttk.Frame):
     def draw(self):
         """Update list and all stats"""
         try: self.list.delete(*self.list.get_children())        
-        except:
-            return        
+        except: return        
         
         if self.sortList.get()==0: # by name
             self.student=sorted(self.student, key=lambda s: s[0])
         elif self.sortList.get()==1: # by date1
-            self.student=sorted(self.student, key=lambda s: s[5])
+            self.student=sorted(self.student, key=lambda s: s[7])
         elif self.sortList.get()==2: # by date2
-            self.student=sorted(self.student, key=lambda s: s[6])
-        #elif self.sortList.get()==3: # by study
-        #    self.student=sorted(self.student, key=lambda s: getNumerical(s[3]))
-        elif self.sortList.get()==3: # by note
+            self.student=sorted(self.student, key=lambda s: s[8])
+        elif self.sortList.get()==3: # by study
+            self.student=sorted(self.student, key=lambda s: getNumerical(s[3]))
+        elif self.sortList.get()==4: # by note
             self.student=sorted(self.student, key=lambda s: s[4])
         
         # Create virtual list to display with all filters
@@ -655,8 +666,7 @@ class Root(ttk.Frame):
         # Show change time
         try:
             self.statusBar["text"] = "Последнее изменение: %s     " % datetime.datetime.fromtimestamp(os.path.getmtime("students.txt")) # last core save            
-        except:
-            pass
+        except: pass
         
         # Mark inactive
         if self.status.get()=="+" and self.noactive>0:
@@ -672,10 +682,10 @@ class Root(ttk.Frame):
         
     def resizeList(self):
         """Resize columns"""
-        self.list.column(0, width=80)
+        self.list.column(0, width=60)
         self.list.column(1, width=50)
         self.list.column(2, width=50)
-        #self.list.column(3, width=1)
+        self.list.column(3, width=1)
         #self.list.column(4, width=100)
         
     def getWinSize(self, event=None, save=None):
@@ -726,19 +736,18 @@ class Root(ttk.Frame):
             if str(getRealName(self.student[editedstudent][0]))==getRealName(str(selected[0])):
                 fields=Card(self, self.student[editedstudent]).getFields()
                 if fields!=None:
-                    for i in range(5):
+                    for i in range(7):
                         self.student[editedstudent][i] = fields[i]
-                    self.student[editedstudent][5] = [
+                    self.student[editedstudent][7] = [
                         fields[1][6], fields[1][7], fields[1][3], fields[1][4], fields[1][0], fields[1][1]
                         ]                                                
-                    self.student[editedstudent][6] = [
+                    self.student[editedstudent][8] = [
                         fields[2][6], fields[2][7], fields[2][3], fields[2][4], fields[2][0], fields[2][1]
                         ]                        
                     for i in range(len(self.student)):
                             if(self.student[i][3]) != "":
                                 try: self.student[i].append(int(self.student[i][3]))
-                                except:
-                                    self.student[i].append(0)
+                                except: self.student[i].append(0)
                             else:
                                 self.student[i].append(0)                                
                     self.save()
@@ -761,8 +770,7 @@ class Root(ttk.Frame):
             for i in range(len(self.student)): # create additional integer field to sort by counsel point
                 if(self.student[i][3]) != "":
                     try: self.student[i].append(int(self.student[i][3]))
-                    except:
-                        self.student[i].append(0)
+                    except: self.student[i].append(0)
                 else:
                     self.student[i].append(0)
             self.save()            
@@ -865,18 +873,11 @@ class Root(ttk.Frame):
                                                         ])
                     b += 7        
                 for i in range(len(student)): # creating additional temporary integer field for sorting by counsel
-                    if(student[i][3]) != "":
-                        try: student[i].append(int(student[i][3]))
-                        except:
-                            pass
-                    else:
-                        student[i].append(0)
-                    
-                    # Delete study after Jan 1, 2019                    
-                    del student[i][3]
-                    del student[i][6]
-                        
-                        
+                        if(student[i][3]) != "":
+                            try: student[i].append(int(student[i][3]))
+                            except: pass
+                        else:
+                            student[i].append(0)
             self.student=student
             self.checkBrackets()
             result=True
@@ -894,11 +895,6 @@ class Root(ttk.Frame):
         """Save and backing up student list"""                
         limit=int(self.datastring[16])
         #self.student=sorted(self.student, key=lambda student: student[0])
-        
-        # Artificially add study after Jan 1, 2019
-        for a in self.student:
-            a.insert(3, "N/A")
-            a.insert(6, "N/A")
         
         # First back up
         if not path.exists("./backup"):
@@ -941,14 +937,9 @@ class Root(ttk.Frame):
                 for a in range(len(self.student)):
                     for i in range(7):
                         newfile.write(str(self.student[a][i]) + "\n")                    
-                    
-                    # Delete study after Jan 1, 2019                    
-                    del self.student[a][3]
-                    del self.student[a][6]
         else:
             try: remove("students.txt")
-            except:
-                pass
+            except: pass
                     
     def imp(self):
         filename=filedialog.askopenfilename(filetypes=[("База данных Students", ".txt")], defaultextension='.txt')        
