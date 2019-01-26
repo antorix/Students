@@ -846,7 +846,7 @@ class Setup(tk.Frame):
         
         # Buttons        
         ttk.Button(frame1, text="Найти",    image=self.root.img[14], compound="left", style="small.TButton", command=self.browse).                         grid(column=2, row=4, pady=pad*2, sticky="ne")
-        ttk.Button(frame1, text="Вставить", image=self.root.img[15], compound="left", style="small.TButton", command=lambda: self.insert(self.entries[4])).grid(column=2, row=5, pady=pad*2, sticky="ne")
+        ttk.Button(frame1, text="Вставить", image=self.root.img[15], compound="left", style="small.TButton", command=lambda: self.insert(self.entries[5])).grid(column=2, row=5, pady=pad*2, sticky="ne")
         
         # Buttons frame to save/cancel
         frame2=tk.Frame(self.window)
@@ -862,9 +862,9 @@ class Setup(tk.Frame):
     def browse(self, event=None):
         filename=filedialog.askopenfilename()
         if filename!="":
-            self.entries[3].delete(0.0, "end")        
-            self.entries[3].insert(0.0, filename)
-        self.entries[3].focus_force()
+            self.entries[4].delete(0.0, "end")        
+            self.entries[4].insert(0.0, filename)
+        self.entries[4].focus_force()
         
     def insert(self, widget):
         """Insert clipboard into field"""
