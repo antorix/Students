@@ -417,7 +417,7 @@ class Root(ttk.Frame):
             
             if flag==1:
                 buttonsList.append("Без группы")        
-            buttonsList.append("Все")
+            buttonsList.insert(0, "Все")
             
             # Draw radiobuttons
             self.groupFrame.grid()            
