@@ -289,9 +289,9 @@ class Root(ttk.Frame):
         if self.sortList.get()==0: # by name
             self.student=sorted(self.student, key=lambda s: s[0])
         elif self.sortList.get()==1: # by date1
-            self.student=sorted(self.student, key=lambda s: s[6])
-        elif self.sortList.get()==2: # by date2
             self.student=sorted(self.student, key=lambda s: s[7])
+        elif self.sortList.get()==2: # by date2
+            self.student=sorted(self.student, key=lambda s: s[8])
         elif self.sortList.get()==3 and self.datastring[13]=="1": # by group
             self.student=sorted(self.student, key=lambda s: s[3])
         
@@ -623,7 +623,7 @@ class Root(ttk.Frame):
             self.student=student
             self.checkBrackets()
             result=True
-            
+        print(self.student[0])    
         return result
 
     def save(self):
