@@ -618,12 +618,10 @@ class Root(ttk.Frame):
                             student[i][3]="Без группы"
                     except:
                         student[i][3]="Без группы"
-            
                         
             self.student=student
             self.checkBrackets()
             result=True
-        print(self.student[0])    
         return result
 
     def save(self):
@@ -982,7 +980,7 @@ class Card(tk.Frame):
         
         # Group
         self.groups = tk.StringVar()                
-        self.groupselector=ttk.Combobox(self.window, width=10, height=20, font=("", self.root.fontsize), state="readonly", textvariable=self.groups)
+        self.groupselector=ttk.Combobox(self.window, width=10, height=21, font=("", self.root.fontsize), state="readonly", textvariable=self.groups)
         fullGroupsList=["Без группы", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
         self.groupselector["values"]=fullGroupsList
         if self.root.datastring[13]=="1":
