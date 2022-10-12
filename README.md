@@ -20,5 +20,5 @@
 * Открытый исходный код на GitHub.
 * Поддержка Windows, Linux и Mac.
 
-* **Загрузка:**
+**Загрузка:**
 https://github.com/antorix/Students/raw/master/students.zip
