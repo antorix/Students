@@ -2,6 +2,8 @@
 
 Планирование и назначение учебных заданий НХЖС
 
+![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDNNOqOVPXvuPmLIXpQyFRTkN5da6cRvmXS7BEGB31ZUyvA134ISq-HTq24HGgtkBQt7o4pQ6xSZUTLwvhEquYzXtPTXxQVOvTUsOcPEyYDEpICuOPjMLA8THB4DkQtQfy1sVgcgLOqYgZI1grtOGtD_Jm41O-cZc7pltnWjopHQBJJ51DjD8IXzb5/s672/screenshot.png)
+
 * Сортировка учащихся по имени и дате выступлений (чем выше, тем дольше не выступал).
 * Статистика учащихся.
 * Запись заметок и советов по каждому учащемуся.
