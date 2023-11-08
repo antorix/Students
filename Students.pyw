@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-currentversion = "3.3.2"
+currentversion = "3.3.3"
 
 import tkinter as tk
 from tkinter import ttk
@@ -81,7 +81,7 @@ def getSettings():
         except:
             with open("data.ini", "w", encoding="utf-8") as file:
                 file.write(
-                    "\n\n\n\n\n\n\n\n\n\n\n\nВсе\n1\n\n" + currentversion + "\n30\ns-89-u-4up.pdf\nв\n9\n0\n-\nhttps://www.jw.org/ru/публикации/свидетелей-иеговы-встреча-рабочая-тетрадь/\n1"
+                    "\n\n\n\n\n\n\n\n\n\n\n\nВсе\n1\n\n" + currentversion + "\n30\ns-89-u-4up.pdf\nв\n9\n0\n-\nhttps://wol.jw.org/ru/wol/lv/r2/lp-u/0/28947/\n1"
                 )
         else:
             break            
@@ -177,7 +177,7 @@ class Root(ttk.Frame):
         self.menuHelp = tk.Menu(self.menubar, tearoff=0)                       
         self.menubar.add_cascade(label="Помощь", menu=self.menuHelp)
         self.menuHelp.add_command(label="Справка", command=lambda: webbrowser.open("readme.txt"))
-        self.menuHelp.add_command(label="Сайт", command=lambda: webbrowser.open("http://studentsprogram.blogspot.com"))
+        self.menuHelp.add_command(label="Сайт", command=lambda: webbrowser.open("https://github.com/antorix/Students"))
         self.menuHelp.add_separator()
         self.menuHelp.add_command(label="О программе", command=lambda: mb.showinfo("О программе", "Students (v.%s)\n\nРаспределение и назначение учебных заданий\n\nБесплатно, лицензия GPL" % currentversion))
         self.master.config(menu=self.menubar)

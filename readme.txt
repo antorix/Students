@@ -2,8 +2,6 @@
 
 Students не требует установки, но необходимо установить движок Python. Для этой цели в Windows просто запустите файл УСТАНОВКА.exe. Проверьте соединение с Интернетом – будет загружено примерно 13 МБ. Сама программа запускается файлом Students.pyw. Можно создать ярлык на рабочем столе с помощью прилагаемой иконки (файл icon.ico).
 
-Если при запуске файла Halieus.pyw в Windows возникает ошибка типа «Отсутствует файл api-ms-win-crt-runtime-l1-1-0.dl», см. здесь: https://helpx.adobe.com/ru/creative-cloud/kb/error_on_launch.html
-
 Ubuntu Linux
 
 Введите:
@@ -41,6 +39,6 @@ http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.act
 
 Программа предоставляется по принципу «как есть». Автор не дает никаких гарантий.
 
-КОНТАКТЫ
+ТЕХПОДДЕРЖКА
 
-Антон Чивчалов, email: anton@chivchalov.ru, сайт: studentsprogram.blogspot.com.
+inoblogger@gmail.com
