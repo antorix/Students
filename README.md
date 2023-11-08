@@ -20,4 +20,4 @@
 * Поддержка Windows, Linux и Mac.
 
 **Загрузка:**
-[https://github.com/antorix/Students/raw/master/students.zip](https://github.com/antorix/Students/releases/download/main/students.zip)
+[https://github.com/antorix/Students/releases/download/main/students.zip](https://github.com/antorix/Students/releases/download/main/students.zip)
