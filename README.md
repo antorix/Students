@@ -2,7 +2,7 @@
 
 Планирование и назначение учебных заданий НХЖС
 
-![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDNNOqOVPXvuPmLIXpQyFRTkN5da6cRvmXS7BEGB31ZUyvA134ISq-HTq24HGgtkBQt7o4pQ6xSZUTLwvhEquYzXtPTXxQVOvTUsOcPEyYDEpICuOPjMLA8THB4DkQtQfy1sVgcgLOqYgZI1grtOGtD_Jm41O-cZc7pltnWjopHQBJJ51DjD8IXzb5/s672/screenshot.png)
+![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPSRPL42fNuvP8j5m3Fh7krcDW0bVqez_KxnTJZyRypMsEWAf3a2CTLM280kIOe_D7zGheBXkua0Cf3IauELbRFV8ZejD9_tq1veMhCm1Aa6A_W9yoGVw3kkFbYiiHR8ahMbvlRmJMUpaDiMst3-j54PwC7FYiecpsGJ8JXRnABtomDSTvh7hAoSO9-gX-/s1600/screenshot.png)
 
 * Сортировка учащихся по имени и дате выступлений (чем выше, тем дольше не выступал).
 * Статистика учащихся.
@@ -17,7 +17,6 @@
 * Резервирование базы данных при каждом сохранении.
 * Автоматическое фоновое обновление программы через Интернет (с минимальным трафиком).
 * База данных хранится в простом, человекочитаемом текстовом файле, который удобно открывать и редактировать на мобильных устройствах.
-* Открытый исходный код на GitHub.
 * Поддержка Windows, Linux и Mac.
 
 **Загрузка:**
